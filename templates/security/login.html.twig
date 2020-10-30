@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Connexion {% endblock %}
+{% block body %} 
+  <div class="container">
+    <div class="row-md-4 mt-4">
+        <div class="col-md-6 mx-auto">
+        {% if error%}
+           <div>{{ error.messageKey | trans(error.messageData, 'security')}} </div>
+        {% endif %}
+          <div class="card bg-light rounded">
+                <div class="container-fluid">
+                   <div class="card-title title-default p-4">
+                     Connexion
+                   </div>
+                   <div class="card-body mt-2 rouded">
+                        <form action="{{path('security_login')}}" method="POST">
+                        <div class="form-group">
+                            <label for="username"> Pseudo*</label>
+                            <input type="text" name="_username" id="username" required class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">  Mot De Passe </label>
+                            <input type="password" name="_password" id="password" required class="form-control">
+                        </div>
+                        <!-- doit etre avant btn submit -->
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <input type="hidden" name="_target_path" value="{{app.request.get('redirect_to')}}">
+                        <!-- ################################- -->
+                        <div class="form-group">
+                             <button class="btn btn-success" type="submit" id="login" name="login"> valider  </button>
+                        </div>
+                       
+                        </form>
+                   </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+ 
+    
+{% endblock %}

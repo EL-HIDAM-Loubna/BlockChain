@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{post.title}} {% endblock %}
+{% block body %} 
+  <div class="container">
+    <div class="row-md-4 mt-4">
+        <div class="col-md-6 mx-auto">
+            <div class="card bg-light rounded">
+                <div class="container-fluid">
+                   <div class="card-title title-default p-4">
+                        Articles
+                   </div>
+                   <div class="card-body mt-2 rouded">
+                           <img src="https://picsum.photos/400/400"  class="mr-3 rounded" alt="">
+                           <div class="media">
+                           <div class="media-body">
+                           <h5 class="mt-5">{{post.title}}</h5>
+                           {{post.body}}
+                           </div>
+                           </div>
+                           <hr/>
+                      
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+ 
+    
+{% endblock %}

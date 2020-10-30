@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Acueil {% endblock %}
+{% block body %} 
+  <div class="container">
+    <div class="row-md-4 mt-4">
+        <div class="col-md-6 mx-auto">
+        {% for message in app.flashes('notice')%}
+          <div class="alert alert-success"> {{message}} </div>
+             
+        {% endfor %}
+        <div class="card bg-light rounded">
+                <div class="container-fluid">
+                   <div class="card-title title-default p-4">
+                        Articles
+                   </div>
+                   <div class="card-body mt-2 rouded">
+                   {% for post in posts  %}
+                      <div class="media">
+                        <img src="https://picsum.photos/100/100"  class="mr-3 rounded" alt="">
+                        <div class="media-body">
+                          <span> {{post.user.fullname}} </span>
+                          <h5 class="mt-0">
+                            <a href="{{path('post_show',{'id':post.id})}}" >{{post.title}}</a>
+                          </h5>
+                          {{post.body}}
+                        </div>
+                        {% if is_granted('edit', post) %}
+                          <a href="{{path('post_edit',{'id':post.id})}}" class="btn btn-outline-warning btn-sm float-right mr-2"> Modifier </a>
+                          <a href="{{path('post_delete',{'id':post.id})}}" class="btn btn-outline-danger btn-sm float-right mr-2"> Supprimer </a>
+                        {% endif %}
+                      </div>
+                      <hr/>
+                    {% endfor %}
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+ 
+    
+{% endblock %}
